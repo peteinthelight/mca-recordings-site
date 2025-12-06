@@ -84,21 +84,84 @@ exports.handler = async () => {
       <html>
       <head>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>MCA Meeting Recordings</title>
         <style>
-          body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 2rem; background: #f5f5f5; }
-          h1 { margin-bottom: 0.5rem; }
-          .subtitle { margin-bottom: 1.5rem; color: #555; }
-          .meeting { background: #fff; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-          .date { font-weight: 600; margin-bottom: 0.5rem; }
-          .file { margin-left: 1rem; margin-bottom: 0.25rem; }
-          a { text-decoration: none; color: #2563eb; }
-          a:hover { text-decoration: underline; }
+          :root {
+            color-scheme: light;
+          }
+          body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+          }
+          .page {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+          }
+          h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+          }
+          .subtitle {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 0.95rem;
+          }
+          .meeting {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          }
+          .date {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+          }
+          .file {
+            margin-left: 0.75rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.95rem;
+          }
+          a {
+            text-decoration: none;
+            color: #2563eb;
+          }
+          a:hover {
+            text-decoration: underline;
+          }
+
+          /* Mobile tweaks */
+          @media (max-width: 600px) {
+            .page {
+              padding: 1.25rem 1rem;
+            }
+            h1 {
+              font-size: 1.4rem;
+            }
+            .subtitle {
+              font-size: 0.9rem;
+            }
+            .meeting {
+              padding: 0.85rem 0.9rem;
+            }
+            .date {
+              font-size: 0.95rem;
+            }
+            .file {
+              font-size: 0.9rem;
+            }
+          }
         </style>
       </head>
       <body>
-        <h1>MCA Meeting Recordings</h1>
-        <div class="subtitle">Meeting ID: ${MEETING_ID}</div>
+        <div class="page">
+          <h1>MCA Meeting Recordings</h1>
+          <div class="subtitle">Meeting ID: ${MEETING_ID}</div>
     `;
 
     if (!filtered.length) {
@@ -122,7 +185,7 @@ exports.handler = async () => {
           return (order[a.file_type] || 99) - (order[b.file_type] || 99);
         });
 
-        // Display VIDEO and AUDIO labels (NO timestamps)
+        // Display VIDEO and AUDIO labels (no timestamps here)
         files.forEach(file => {
           if (file.play_url) {
             let label = file.file_type;
@@ -141,7 +204,11 @@ exports.handler = async () => {
       });
     }
 
-    html += `</body></html>`;
+    html += `
+        </div>
+      </body>
+      </html>
+    `;
 
     return {
       statusCode: 200,
