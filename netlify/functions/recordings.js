@@ -4,19 +4,18 @@ exports.handler = async () => {
 
   // Helper to format Zoom timestamps nicely, e.g. "Dec 6, 2025, 3:40 PM"
   function formatDate(isoString) {
-  if (!isoString) return "";
-  const date = new Date(isoString);
-  return date.toLocaleString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-    timeZone: "America/Mexico_City"
-  });
-}
-
+    if (!isoString) return "";
+    const date = new Date(isoString);
+    return date.toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "America/Mexico_City"   // match your Zoom display
+    });
+  }
 
   try {
     const {
@@ -61,7 +60,7 @@ exports.handler = async () => {
     const userId = process.env.ZOOM_USER_ID || "me";
 
     const recRes = await fetch(
-      `https://api.zoom.us/v2/users/${encodeURIComponent(userId)}/recordings?page_size=100`,
+      `https://api.zoom.us/v2/users/${encodeURIComponent(userId)}/recordings?page_size=200`,
       {
         headers: { Authorization: `Bearer ${accessToken}` }
       }
@@ -115,13 +114,29 @@ exports.handler = async () => {
           <div class="topic">${topic}</div>
         `;
 
-        (meeting.recording_files || []).forEach(file => {
+        // Filter out SUMMARY files
+        let files = (meeting.recording_files || []).filter(file => {
+          return file.file_type !== "SUMMARY";
+        });
+
+        // Sort: VIDEO (MP4) first, AUDIO (M4A) second
+        files.sort((a, b) => {
+          const order = { MP4: 1, M4A: 2 };
+          return (order[a.file_type] || 99) - (order[b.file_type] || 99);
+        });
+
+        // Display VIDEO and AUDIO labels
+        files.forEach(file => {
           if (file.play_url) {
-            const type = file.file_type || "Recording";
+            let label = file.file_type;
+            if (label === "MP4") label = "VIDEO";
+            if (label === "M4A") label = "AUDIO";
+
             const recStart = formatDate(file.recording_start);
+
             html += `<div class="file">
               • <a href="${file.play_url}" target="_blank" rel="noopener noreferrer">
-                ${type} (${recStart})
+                ${label} (${recStart})
               </a>
             </div>`;
           }
