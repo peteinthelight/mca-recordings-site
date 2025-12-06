@@ -1,6 +1,22 @@
 // Netlify Function to list Zoom cloud recordings for a single meeting ID
 
 exports.handler = async () => {
+
+  // Helper to format Zoom timestamps nicely, e.g. "Dec 6, 2025, 3:40 PM"
+  function formatDate(isoString) {
+    if (!isoString) return "";
+    const date = new Date(isoString);
+    return date.toLocaleString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+      // If you prefer UTC instead of local time, add: timeZone: "UTC"
+    });
+  }
+
   try {
     const {
       ZOOM_ACCOUNT_ID,
@@ -90,7 +106,7 @@ exports.handler = async () => {
       html += `<p>No recordings found yet for this meeting.</p>`;
     } else {
       filtered.forEach(meeting => {
-        const startTime = meeting.start_time || "Unknown date";
+        const startTime = formatDate(meeting.start_time);
         const topic = meeting.topic || "MCA Meeting";
 
         html += `<div class="meeting">
@@ -101,7 +117,7 @@ exports.handler = async () => {
         (meeting.recording_files || []).forEach(file => {
           if (file.play_url) {
             const type = file.file_type || "Recording";
-            const recStart = file.recording_start || "";
+            const recStart = formatDate(file.recording_start);
             html += `<div class="file">
               • <a href="${file.play_url}" target="_blank" rel="noopener noreferrer">
                 ${type} (${recStart})
