@@ -104,6 +104,7 @@ exports.handler = async () => {
           h1 {
             margin: 0 0 0.5rem 0;
             font-size: 1.8rem;
+            color: white; /* match your inspector tweak */
           }
           .subtitle {
             margin-bottom: 1.5rem;
