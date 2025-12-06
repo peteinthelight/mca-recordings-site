@@ -4,18 +4,19 @@ exports.handler = async () => {
 
   // Helper to format Zoom timestamps nicely, e.g. "Dec 6, 2025, 3:40 PM"
   function formatDate(isoString) {
-    if (!isoString) return "";
-    const date = new Date(isoString);
-    return date.toLocaleString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true
-      // If you prefer UTC instead of local time, add: timeZone: "UTC"
-    });
-  }
+  if (!isoString) return "";
+  const date = new Date(isoString);
+  return date.toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/Los_Angeles" // change this if your Zoom timezone is different
+  });
+}
+
 
   try {
     const {
