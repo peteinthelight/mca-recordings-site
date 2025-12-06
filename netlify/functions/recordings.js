@@ -94,7 +94,7 @@ exports.handler = async () => {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             margin: 0;
             padding: 0;
-            background: #f5f5f5;
+            background: #2a28cb;
           }
           .page {
             max-width: 720px;
@@ -104,10 +104,11 @@ exports.handler = async () => {
           h1 {
             margin: 0 0 0.5rem 0;
             font-size: 1.8rem;
+            color: #fff;
           }
           .subtitle {
             margin-bottom: 1.5rem;
-            color: #555;
+            color: #fff;
             font-size: 0.95rem;
           }
           .meeting {
@@ -126,6 +127,7 @@ exports.handler = async () => {
             margin-left: 0.75rem;
             margin-bottom: 0.25rem;
             font-size: 0.95rem;
+            line-height: 1.4;
           }
           a {
             text-decoration: none;
