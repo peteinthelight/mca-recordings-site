@@ -41,8 +41,10 @@ exports.handler = async () => {
     const accessToken = tokenData.access_token;
 
     // 2) Fetch recordings for your user
+    const userId = process.env.ZOOM_USER_ID || "me";
+
     const recRes = await fetch(
-      "https://api.zoom.us/v2/users/me/recordings?page_size=100",
+      `https://api.zoom.us/v2/users/${encodeURIComponent(userId)}/recordings?page_size=100`,
       {
         headers: { Authorization: `Bearer ${accessToken}` }
       }
