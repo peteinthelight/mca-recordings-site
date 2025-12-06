@@ -13,7 +13,7 @@ exports.handler = async () => {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
-    timeZone: "America/Los_Angeles" // change this if your Zoom timezone is different
+    timeZone: "America/Mexico_City"
   });
 }
 
