@@ -157,7 +157,7 @@ exports.handler = async () => {
               font-size: 1.1rem;
             }
             .file {
-              font-size: 1.1rem;
+              font-size: 1rem;
             }
           }
         </style>
