@@ -138,6 +138,16 @@ exports.handler = async () => {
           a:hover {
             text-decoration: underline;
           }
+          .refresh {
+          text-align: right;
+          margin-bottom: 1.5rem;
+          }
+          .refresh a {
+          color: #fff;
+          font-size: 0.9rem;
+          text-decoration: underline;
+          }
+
 
           /* Mobile tweaks */
           @media (max-width: 600px) {
@@ -166,6 +176,8 @@ exports.handler = async () => {
         <div class="page">
           <h1>MCA Meeting Zoom Recordings</h1>
           <div class="subtitle">Meeting ID: ${MEETING_ID}</div>
+          <div class="refresh"><a href="">Refresh</a></div>
+
     `;
 
     if (!filtered.length) {
