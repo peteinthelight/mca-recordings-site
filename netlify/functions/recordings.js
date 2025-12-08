@@ -178,9 +178,9 @@ exports.handler = async () => {
           <div class="date">${startTime}</div>
         `;
 
-        // Filter out SUMMARY files
+        // Filter out SUMMARY and CHAT files
         let files = (meeting.recording_files || []).filter(file => {
-          return file.file_type !== "SUMMARY";
+          return file.file_type !== "SUMMARY" && file.file_type !== "CHAT";
         });
 
         // Sort: VIDEO (MP4) first, AUDIO (M4A) second
