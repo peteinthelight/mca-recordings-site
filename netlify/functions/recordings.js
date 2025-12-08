@@ -94,7 +94,7 @@ exports.handler = async () => {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             margin: 0;
             padding: 0;
-            background: #2a28cb;
+            background: #f5f5f5;
           }
           .page {
             max-width: 720px;
@@ -104,16 +104,17 @@ exports.handler = async () => {
           h1 {
             margin: 0 0 0.5rem 0;
             font-size: 1.8rem;
-            color: #fff;
+            color: white;
           }
           .subtitle {
             margin-bottom: 1.5rem;
-            color: #fff;
+            color: #555;
             font-size: 0.95rem;
           }
           .meeting {
-            background: #fff;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 1rem 1.25rem;
             margin-bottom: 1rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -127,7 +128,6 @@ exports.handler = async () => {
             margin-left: 0.75rem;
             margin-bottom: 0.25rem;
             font-size: 0.95rem;
-            line-height: 1.4;
           }
           a {
             text-decoration: none;
@@ -176,9 +176,9 @@ exports.handler = async () => {
           <div class="date">${startTime}</div>
         `;
 
-        // Filter out SUMMARY files
+        // Filter out SUMMARY and CHAT files
         let files = (meeting.recording_files || []).filter(file => {
-          return file.file_type !== "SUMMARY";
+          return file.file_type !== "SUMMARY" && file.file_type !== "CHAT";
         });
 
         // Sort: VIDEO (MP4) first, AUDIO (M4A) second
