@@ -107,7 +107,6 @@ exports.handler = async () => {
             color: #fff;
           }
           .subtitle {
-            margin-bottom: 1.5rem;
             color: #fff;
             font-size: 0.95rem;
           }
@@ -140,7 +139,7 @@ exports.handler = async () => {
           }
           .refresh {
           text-align: right;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.4rem;
           }
           .refresh a {
           color: #fff;
