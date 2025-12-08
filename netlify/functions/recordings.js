@@ -154,10 +154,10 @@ exports.handler = async () => {
               padding: 0.85rem 0.9rem;
             }
             .date {
-              font-size: 0.95rem;
+              font-size: 1.1rem;
             }
             .file {
-              font-size: 0.9rem;
+              font-size: 1.1rem;
             }
           }
         </style>
