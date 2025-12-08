@@ -164,7 +164,7 @@ exports.handler = async () => {
       </head>
       <body>
         <div class="page">
-          <h1>MCA Meeting Recordings</h1>
+          <h1>MCA Meeting Zoom Recordings</h1>
           <div class="subtitle">Meeting ID: ${MEETING_ID}</div>
     `;
 
