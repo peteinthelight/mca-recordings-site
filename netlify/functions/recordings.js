@@ -176,7 +176,7 @@ exports.handler = async () => {
         <div class="page">
           <h1>MCA Meeting Zoom Recordings</h1>
           <div class="subtitle">Meeting ID: ${MEETING_ID}</div>
-          <div class="refresh"><a href=""><span style="font-size: 1.1rem;">↻</span>Refresh</a></div>
+          <div class="refresh"><a href=""><span style="font-size: 1rem;">↻</span> Refresh</a></div>
 
     `;
 
