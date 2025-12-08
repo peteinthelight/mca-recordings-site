@@ -112,11 +112,12 @@ exports.handler = async () => {
             font-size: 0.95rem;
           }
           .meeting {
-            background: #fff;
+            background: #ffffffc7;
             border-radius: 10px;
             padding: 1rem 1.25rem;
             margin-bottom: 1rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid rgb(255 255 255);
           }
           .date {
             font-weight: 600;
@@ -128,10 +129,11 @@ exports.handler = async () => {
             margin-bottom: 0.25rem;
             font-size: 0.95rem;
             line-height: 1.4;
+            font-weight: 500;
           }
           a {
             text-decoration: none;
-            color: #2563eb;
+            color: #0a44c4;
           }
           a:hover {
             text-decoration: underline;
