@@ -85,7 +85,7 @@ exports.handler = async () => {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>MCA Meeting Recordings</title>
+        <title>MCA Meeting Zoom Recordings</title>
         <style>
           :root {
             color-scheme: light;
