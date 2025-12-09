@@ -59,8 +59,16 @@ exports.handler = async () => {
     // 2) Fetch recordings for your user
     const userId = process.env.ZOOM_USER_ID || "me";
 
+    // Build a 30-day date range for recordings
+    const now = new Date();
+    const to = now.toISOString().split("T")[0]; // yyyy-mm-dd
+
+    const fromDate = new Date();
+    fromDate.setDate(fromDate.getDate() - 30);  // last 30 days
+    const from = fromDate.toISOString().split("T")[0];
+
     const recRes = await fetch(
-      `https://api.zoom.us/v2/users/${encodeURIComponent(userId)}/recordings?page_size=200`,
+      `https://api.zoom.us/v2/users/${encodeURIComponent(userId)}/recordings?page_size=200&from=${from}&to=${to}`,
       {
         headers: { Authorization: `Bearer ${accessToken}` }
       }
